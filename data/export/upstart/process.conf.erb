@@ -11,4 +11,8 @@ setuid <%= user %>
 
 chdir <%= engine.root %>
 
-exec <%= process.command %>
+script
+  <%= engine.script_preamble if engine.respond_to?(:script_preamble) %>
+  <%= process.command %>
+  <%= engine.script_postamble if engine.respond_to?(:script_postamble) %>
+end script
